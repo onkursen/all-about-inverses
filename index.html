@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Onkur Sen: Concise Linear Algebra</title>
+		<title>All About Inverses - A Concise Primer On Linear Algebra</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="A Concise Primer On Linear Algebra">
+		<meta name="author" content="Onkur Sen">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -44,11 +44,11 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section data-markdown>
-					# All About Inverses
-					## A Concise Primer On Linear Algebra
-
-					[Onkur Sen](http://onkursen.com/)
+				<section>
+					<h1>All About Inverses</h1>
+					<h2>A Concise Primer On Linear Algebra</h2>
+					<br>
+					<h3><a href="http://onkursen.com/">Onkur Sen</a></h3>
 				</section>
 
 				<section>
@@ -56,7 +56,7 @@
 						<h1>Basics</h1>
 					</section>
 					<section>
-						<h2>What's a matrix?</h2>
+						<h2>What is a matrix?</h2>
 
 						\( A \in \mathcal{R}^{m \times n}, A = a_{ij} \)<br>
 						<br>
@@ -223,12 +223,11 @@
 					<section>
 						<h2>Linear independence</h2>
 
-						A set of vectors \(\{v_i\}_{i=1}^n\) is<br>
-						<strong>linearly independent</strong> if<br>
+						A set of vectors \(\{v_i\}_{i=1}^n\) is <strong>linearly independent</strong> if<br>
 						the only linear combination equal to zero<br>
 						has all coefficients equal to zero.<br>
 						<br>
-						\( \{v_i\}_{i=1}^n \mbox{ linearly independent} \)<br>
+						\( \{v_i\}_{i=1}^n \) linearly independent<br>
 						\( \Longrightarrow \left( \sum_{i=1}^n c_i v_i = 0 \Leftrightarrow c_i = 0 \; \forall i \right) \)<br>
 						<br>
 						Alternately, \(\{v_i\}_{i=1}^n\) is linearly independent if<br>
@@ -239,8 +238,8 @@
 					<section>
 						<h2>Can you invert a matrix? (Part 2)</h2>
 
-						\(A\) is <strong>invertible</strong> if<br>
-						its rows are linearly independent.<br>
+						\(A\) is invertible if<br>
+						its <strong>rows</strong> are linearly independent.<br>
 						<br>
 						\(A\) is also invertible if<br>
 						its <strong>columns</strong> are linearly independent.
@@ -281,8 +280,10 @@
 									a & b\\
 									c & d\\ 
 									\end{array}\right)
+						\]<br>
+						\(
 							\Rightarrow \det(A) = ad-bc
-						\]
+						\)
 					</section>
 
 					<section>
@@ -312,7 +313,7 @@
 
 				<section>
 					<section>
-						<h1>Eigenvalues and Eigenvectors</h1>
+						<h1>Eigenvalues,<br>Eigenvectors</h1>
 						<h2>(and inverses)</h2>
 					</section>
 
@@ -321,10 +322,10 @@
 
 						For a square matrix \(A\),<br>
 						we often examine special vectors \(v\)<br>
-						where \(Av = \lambda v\).<br>
+						that do not rotate when \(A\) is applied.<br>
 						<br>
-						That is, matrix multiplication by \(A\) is<br>
-						equivalent to scalar multiplication by \(\lambda\).<br>
+						That is, for a certain scalar \(\lambda\),<br>
+						\(Av = \lambda v\).<br>
 						<br>
 						In this case, we call \(\lambda\) and \(v\)<br>
 						an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvalue and eigenvector</a> of \(A\).<br>
@@ -351,20 +352,21 @@
 
 						<h4>Proof</h4>
 
-						Suppose \((A-\lambda I)\) is invertible.<br>
-						Then \((A-\lambda I)^{-1}\) exists.<br>
+						Suppose \((A-\lambda I)^{-1}\) exists.<br>
 						<br>
 						\( (A-\lambda I)v = 0 \)<br>
 						\( \Rightarrow (A-\lambda I)^{-1}(A-\lambda I)v = 0 \)<br>
-						\( \Rightarrow Iv = 0 \Rightarrow v=0. \)<br>
+						\( \Rightarrow Iv = 0\)<br>
+						\( \Rightarrow v=0. \)<br>
 						This contradicts our original assumption that \(v \neq 0\).<br>
+						<br>
 						<strong>QED</strong>
 					</section>
 
 					<section>
 						<h2>How do I find eigenvalues?</h2>
 							The \(v=0\) case is boring.<br>
-							\( A\times 0 = 0 = \lambda \times 0 \Rightarrow \lambda\) can be anything<br>
+							\( A\times 0 = 0 = \lambda \times 0 \Rightarrow \lambda\) can be anything.<br>
 							<br>
 							So, let's focus on \(v \neq 0\), so that \(\det{(A-\lambda I)} = 0\).<br>
 							<br>
@@ -380,7 +382,7 @@
 
 						Suppose the eigenvalues \( \{\lambda_i\}_{i=1}^n \) are all distinct.<br>
 						To get the eigenvectors \( \{v_i\}_{i=1}^n \) , solve the original equations:<br>
-						\( (A - \lambda_i)v_i = 0, i = 1 \ldots n \).<br>
+						\( (A - \lambda_i)v_i = 0, i = 1,\ldots,n \).<br>
 						<br>
 						This produces \(n\) simultaneous linear equations.<br>
 						Then, write each \(v_i\) in terms of one common component.<br>
@@ -393,18 +395,13 @@
 
 				<section>
 					<h2>Thanks for reading!</h2>
-					<p>
-						Here are some more resources:
-						<ul>
-							<li><a href="http://comp.uark.edu/~lcapogna/LinAlgForCal2v5.pdf">Matrices and Linear Algebra</a>: an accessible introductory pamphlet</li>	
-							<li><a href="http://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/">Course 18.06SC</a>: MIT's famous linear algebra course</li>
-							<li><a href="http://www.amazon.com/Linear-Algebra-Right-Sheldon-Axler/dp/0387982582">Linear Algebra Done Right</a>: a canonical textbook</li>
-						</ul>
-					</p>
-				</section>
 
-				<section>
-					<h2>Like this? Questions? Comments?</h2>
+					<h3>Resources</h3>
+					<a href="http://comp.uark.edu/~lcapogna/LinAlgForCal2v5.pdf">Matrices and Linear Algebra</a>: accessible introductory pamphlet<br>
+					<a href="http://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/">Course 18.06SC</a>: MIT's famous linear algebra course<br>
+					<a href="http://www.amazon.com/Linear-Algebra-Right-Sheldon-Axler/dp/0387982582">Linear Algebra Done Right</a>: a canonical textbook<br>
+					<br>
+					<h3>Like this? Questions? Comments?</h3>
 					<a href="http://www.onkursen.com">Check out my website.</a><br>
 					<a href="mailto:onkursen@gmail.com">Email me.</a><br>
 					<a href="http://twitter.com/onkursen">Tweet @onkursen.</a>
