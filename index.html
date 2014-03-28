@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Onkur Sen: Concise Linear Algebra</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=default"></script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-markdown>
+					# All About Inverses
+					## A Concise Primer On Linear Algebra
+
+					[Onkur Sen](http://onkursen.com/)
+				</section>
+
+				<section>
+					<section>
+						<h1>Basics</h1>
+					</section>
+					<section>
+						<h2>What's a matrix?</h2>
+
+						\( A \in \mathcal{R}^{m \times n}, A = a_{ij} \)<br>
+						<br>
+						\(m\) = number of rows<br>
+						\(n\) = number of columns<br>
+						\(m=n \Rightarrow \) "square matrix"<br>
+					</section>
+
+					<section>
+						<h2>Addition</h2>
+
+						If \(A\) and \(B\) are the same size,<br>
+						then add component by component.<br>
+						<br>
+						\( A, B \in \mathcal{R}^{m \times n}\)<br>
+						\(\Rightarrow (A+B)_{ij} = A_{ij} + B_{ij} \)
+					</section>
+
+					<section>
+						<h2>Properties of Addition</h2>
+
+						It is <strong>associative</strong>.<br>
+						\( (A+B)+C = A+(B+C) \) <br>
+						<br>
+						It is <strong>commutative</strong>.<br>
+						\( A+B = B+A \) <br>
+						<br>
+						The <strong>identity</strong> for addition is<br>
+						the matrix of all zeros (written as \(0\)). <br>
+						\( 0_{ij} = 0 \; \forall i, j \)<br>
+						\( A+0 = 0+A = A \)
+					</section>
+
+					<section>
+						<h2>Multiplication</h2>
+						If \(A\) has the same number of columns as \(B\) has rows,<br>
+						then we can multiply them.<br>
+						<br>
+						\( A\in \mathcal{R}^{m \times n}, B\in \mathcal{R}^{n \times p}
+						\Rightarrow AB\in \mathcal{R}^{m \times p}\)<br>
+						\( (AB)_{ij} = \sum_{k=1}^n a_{ik} b_{kj} \)<br>
+						<br>
+						This is the <a href="https://en.wikipedia.org/wiki/Dot_product#Algebraic_definition">dot product</a><br>
+						of the \(i\)th row of \(A\)<br>
+						with the \(j\)th column of \(B\).
+					</section>
+
+					<section>
+						<h2>Properties of Multiplication</h2>
+
+						It is <strong>associative</strong>.<br>
+						\((AB)C\) = \(A(BC)\) <br>
+						<br>
+						It is <strong>not necessarily commutative</strong>.<br>
+						\(AB \stackrel{?}{=} BA\) <br>
+						<br>
+						The <strong>identity</strong> for multiplication is the matrix<br>
+						with \(1\)s on the diagonals and zero otherwise.<br>
+						It is written as \(I\). <br>
+						\( I_{ij} = 1 \mbox{ if } i=j, 0 \mbox{ otherwise} \)<br>
+						\( IA = AI = A \)
+					</section>
+
+					<section>
+						<h2>Transpose</h2>
+						The transpose of a matrix \(A\) is another matrix<br>
+						with the rows and columns of \(A\) inverted.<br>
+						It is written as \( A^T \).<br>
+						<br>
+						\( A^T_{ij} = A_{ji} \)<br>
+						<br>
+						<strong>Note</strong>: \( (A^T)^T = A \)
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Inverse of a Matrix</h1>
+					</section>
+
+					<section>
+						<h2>What is it?</h2>
+
+						The inverse of a <em>square matrix</em> \(A\) is a matrix that<br>
+						multiplies with \(A\) to make the identity matrix.<br>
+						It is written as \(A^{-1}\).<br>
+						<br>
+						\( AA^{-1} = A^{-1}A = I \)<br>
+						<br>
+						<strong>BUT</strong> it does not exist for all \(A\).
+					</section>
+
+					<section>
+						<h2>Why is it important?</h2>
+
+						Invertibility comes up again and again in linear algebra.<br>
+						We'll examine <strong>four</strong> different use cases.
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Row Operations</h1>
+						<h2>(and inverses)</h2>
+					</section>
+
+					<section>
+						<h2>Elementary Row Operations</h2>
+						<p>
+							There are only three!
+							<ol>
+								<li>Switch two rows: \( r_i, r_j \rightarrow r_j, r_i\)</li>	
+								<li>Multiply a row by a constant: \( r_i \rightarrow Cr_i\)</li>
+								<li>Add two rows together: \( r_i \rightarrow r_i + r_j\)</li>
+							</ol>
+						</p>
+						You can also do 2 and 3 at the same time:<br>
+						\( r_i \rightarrow C_1 r_i + C_2 r_j\)
+					</section>
+
+					<section>
+						<h2>Can you invert a matrix? (Part 1)</h2>
+
+						\(A\) is <strong>invertible</strong> if<br>
+						it can be reduced to \(I\)<br>
+						using elementary row operations.<br>
+						<br>
+						\(A^{-1}\) is the result of<br>
+						the same operations applied to \(I\).<br>
+						<br>
+						The method to do this<br>
+						on the <strong>augmented matrix</strong> \( [A \; \vert \; I]\)<br>
+						is called 
+						<a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.
+					</section>
+
+					<section>
+						<h2>Intuition for inverting Part 1</h2>
+
+						By going from \(A\) to \(I\) with row operations,<br>
+						we basically multiply by \(A^{-1}\) (since \(AA^{-1}=I\)).<br>
+						<br>
+						Furthermore, since \(IA^{-1} = A^{-1}\),<br>
+						we can do the same operations on \(I\)<br>
+						to get \(A^{-1}\) explicitly.
+					</section>
+				</section>
+
+				<section>
+
+					<section>
+						<h1>Linear independence</h1>
+						<h2>(and inverses)</h2>
+					</section>
+
+					<section>
+						<h2>Vectors</h2>
+
+						A vector \(v\) is a matrix with one column.<br>
+						<br>
+						\( v \in R^n \)
+					</section>
+
+					<section>
+						<h2>Linear independence</h2>
+
+						A set of vectors \(\{v_i\}_{i=1}^n\) is<br>
+						<strong>linearly independent</strong> if<br>
+						the only linear combination equal to zero<br>
+						has all coefficients equal to zero.<br>
+						<br>
+						\( \{v_i\}_{i=1}^n \mbox{ linearly independent} \)<br>
+						\( \Longrightarrow \left( \sum_{i=1}^n c_i v_i = 0 \Leftrightarrow c_i = 0 \; \forall i \right) \)<br>
+						<br>
+						Alternately, \(\{v_i\}_{i=1}^n\) is linearly independent if<br>
+						no vector \(v_j\) can be created from<br>
+						a linear combination of the other vectors.
+					</section>
+
+					<section>
+						<h2>Can you invert a matrix? (Part 2)</h2>
+
+						\(A\) is <strong>invertible</strong> if<br>
+						its rows are linearly independent.<br>
+						<br>
+						\(A\) is also invertible if<br>
+						its <strong>columns</strong> are linearly independent.
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Determinants</h1>
+						<h2>(and inverses)</h2>
+					</section>
+
+					<section>
+						<h2>What is it?</h2>
+
+						The <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a> is a value<br>
+						associated with <strong>square</strong> matrices.<br>
+						It is written as \( \det(A) \).<br><br>
+					</section>
+
+					<section>
+						<h2>Can you invert a matrix? (Part 3)</h2>
+
+						A square matrix \(A\) is invertible if<br>
+						\( \det(A) \neq 0 \).
+					</section>
+
+					<section>
+						<h2>How do you calculate it?</h2>
+
+						It's best shown with examples.<br><br>
+					</section>
+
+					<section>
+						<h2>2 x 2 Determinant</h2>
+						\[
+							A = \left(\begin{array}{cc}
+									a & b\\
+									c & d\\ 
+									\end{array}\right)
+							\Rightarrow \det(A) = ad-bc
+						\]
+					</section>
+
+					<section>
+						<h2>3 x 3 Determinant</h2>
+						\[
+							A = \left( \begin{array}{ccc}
+							a_1 & a_2 & a_3\\
+							b_1 & b_2 & b_3\\
+							c_1 & c_2 & c_3\\
+							\end{array} \right)
+						\]<br>
+						\( \Rightarrow \det(A) = a_1(b_2c_3-b_3c_2) - \)<br>
+						\( a_2(b_1c_3-b_3c_1) + \)<br>
+						\( a_3(b_1c_2-b_2c_1)\)
+					</section>
+
+					<section>
+						<h2>n x n Determinant</h2>
+
+						For any row \(A_i\),
+
+						\[ \det(A) = \sum_{j=1}^n a_{ij} \cdot (-1)^{i+j} \cdot M_{ij}, \]
+
+						where \( M_{ij} \) is the <a href="https://en.wikipedia.org/wiki/Minor_%28linear_algebra%29">(i, j) minor</a> matrix.
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Eigenvalues and Eigenvectors</h1>
+						<h2>(and inverses)</h2>
+					</section>
+
+					<section>
+						<h2>What are they?</h2>
+
+						For a square matrix \(A\),<br>
+						we often examine special vectors \(v\)<br>
+						where \(Av = \lambda v\).<br>
+						<br>
+						That is, matrix multiplication by \(A\) is<br>
+						equivalent to scalar multiplication by \(\lambda\).<br>
+						<br>
+						In this case, we call \(\lambda\) and \(v\)<br>
+						an <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvalue and eigenvector</a> of \(A\).<br>
+					</section> 
+
+					<section>
+						<h2>Why are they important?</h2>
+
+						After doing a bit of algebra, we can notice:<br>
+						<br>
+						\( Av = \lambda v \)<br>
+						\( \Rightarrow Av - \lambda Iv = 0 \)<br>
+						\( \Rightarrow (A - \lambda I)v = 0. \)<br>
+						<br>
+						Now we can make an assertion...<br>
+					</section> 
+
+					<section>
+						<h2>Can you invert a matrix? (Part 4)</h2>
+
+						<h4>Assertion</h4>
+						If \(v \neq 0\), then \((A-\lambda I)\) is not invertible.<br>
+						Thus, \(\det{(A-\lambda I)} = 0\).<br><br>
+
+						<h4>Proof</h4>
+
+						Suppose \((A-\lambda I)\) is invertible.<br>
+						Then \((A-\lambda I)^{-1}\) exists.<br>
+						<br>
+						\( (A-\lambda I)v = 0 \)<br>
+						\( \Rightarrow (A-\lambda I)^{-1}(A-\lambda I)v = 0 \)<br>
+						\( \Rightarrow Iv = 0 \Rightarrow v=0. \)<br>
+						This contradicts our original assumption that \(v \neq 0\).<br>
+						<strong>QED</strong>
+					</section>
+
+					<section>
+						<h2>How do I find eigenvalues?</h2>
+							The \(v=0\) case is boring.<br>
+							\( A\times 0 = 0 = \lambda \times 0 \Rightarrow \lambda\) can be anything<br>
+							<br>
+							So, let's focus on \(v \neq 0\), so that \(\det{(A-\lambda I)} = 0\).<br>
+							<br>
+							The left-hand side is an \(n^{th}\)-order polynomial in \(\lambda \).<br>
+							Thus, by the <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra">Fundamental Theorem of Algebra</a>,<br>
+							every square matrix has \(n\) eigenvalues.<br>
+							<br>
+							However, the eigenvalues are <strong>not</strong> necessarily distinct.
+					</section>
+
+					<section>
+						<h2>How do I find eigenvectors?</h2>
+
+						Suppose the eigenvalues \( \{\lambda_i\}_{i=1}^n \) are all distinct.<br>
+						To get the eigenvectors \( \{v_i\}_{i=1}^n \) , solve the original equations:<br>
+						\( (A - \lambda_i)v_i = 0, i = 1 \ldots n \).<br>
+						<br>
+						This produces \(n\) simultaneous linear equations.<br>
+						Then, write each \(v_i\) in terms of one common component.<br>
+						Finally, factor the common component out.<br>
+						<br>
+						For example, if at first we obtain \( (v_1, 3v_1, 2v_1) \),<br>
+						then the actual eigenvector is simply \( (1, 3, 2) \).
+					</section>
+				</section>
+
+				<section>
+					<h2>Thanks for reading!</h2>
+					<p>
+						Here are some more resources:
+						<ul>
+							<li><a href="http://comp.uark.edu/~lcapogna/LinAlgForCal2v5.pdf">Matrices and Linear Algebra</a>: an accessible introductory pamphlet</li>	
+							<li><a href="http://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/">Course 18.06SC</a>: MIT's famous linear algebra course</li>
+							<li><a href="http://www.amazon.com/Linear-Algebra-Right-Sheldon-Axler/dp/0387982582">Linear Algebra Done Right</a>: a canonical textbook</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Like this? Questions? Comments?</h2>
+					<a href="http://www.onkursen.com">Check out my website.</a><br>
+					<a href="mailto:onkursen@gmail.com">Email me.</a><br>
+					<a href="http://twitter.com/onkursen">Tweet @onkursen.</a>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
